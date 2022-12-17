@@ -12,8 +12,8 @@ using ScreeningTool.Data;
 namespace ScreeningTool.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221217032853_AddedIdentity")]
-    partial class AddedIdentity
+    [Migration("20221217130629_CreatingScreeningToolUsers")]
+    partial class CreatingScreeningToolUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,7 +209,7 @@ namespace ScreeningTool.Migrations
                     b.ToTable("Questionnaires");
                 });
 
-            modelBuilder.Entity("ScreeningTool.Models.ScreeningUser", b =>
+            modelBuilder.Entity("ScreeningTool.Models.ScreeningToolUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -282,6 +282,30 @@ namespace ScreeningTool.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("ScreeningTool.Models.ScreeningUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Confirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ScreeningUsers");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -293,7 +317,7 @@ namespace ScreeningTool.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("ScreeningTool.Models.ScreeningUser", null)
+                    b.HasOne("ScreeningTool.Models.ScreeningToolUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -302,7 +326,7 @@ namespace ScreeningTool.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("ScreeningTool.Models.ScreeningUser", null)
+                    b.HasOne("ScreeningTool.Models.ScreeningToolUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -317,7 +341,7 @@ namespace ScreeningTool.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ScreeningTool.Models.ScreeningUser", null)
+                    b.HasOne("ScreeningTool.Models.ScreeningToolUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -326,7 +350,7 @@ namespace ScreeningTool.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("ScreeningTool.Models.ScreeningUser", null)
+                    b.HasOne("ScreeningTool.Models.ScreeningToolUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

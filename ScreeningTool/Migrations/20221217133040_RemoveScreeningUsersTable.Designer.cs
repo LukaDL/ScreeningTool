@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ScreeningTool.Data;
 
@@ -11,9 +12,10 @@ using ScreeningTool.Data;
 namespace ScreeningTool.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221217133040_RemoveScreeningUsersTable")]
+    partial class RemoveScreeningUsersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,7 +214,7 @@ namespace ScreeningTool.Migrations
                     b.ToTable("Questionnaires");
                 });
 
-            modelBuilder.Entity("ScreeningTool.Models.ScreeningUser", b =>
+            modelBuilder.Entity("ScreeningTool.Models.ScreeningToolUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -296,7 +298,7 @@ namespace ScreeningTool.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("ScreeningTool.Models.ScreeningUser", null)
+                    b.HasOne("ScreeningTool.Models.ScreeningToolUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -305,7 +307,7 @@ namespace ScreeningTool.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("ScreeningTool.Models.ScreeningUser", null)
+                    b.HasOne("ScreeningTool.Models.ScreeningToolUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -320,7 +322,7 @@ namespace ScreeningTool.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ScreeningTool.Models.ScreeningUser", null)
+                    b.HasOne("ScreeningTool.Models.ScreeningToolUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -329,7 +331,7 @@ namespace ScreeningTool.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("ScreeningTool.Models.ScreeningUser", null)
+                    b.HasOne("ScreeningTool.Models.ScreeningToolUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -338,7 +340,7 @@ namespace ScreeningTool.Migrations
 
             modelBuilder.Entity("ScreeningTool.Models.Questionnaire", b =>
                 {
-                    b.HasOne("ScreeningTool.Models.ScreeningUser", "User")
+                    b.HasOne("ScreeningTool.Models.ScreeningToolUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
