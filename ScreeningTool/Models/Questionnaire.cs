@@ -8,18 +8,13 @@ namespace ScreeningTool.Models
     {
         [Key]
         public int Id { get; set; }
-        /*
         [ForeignKey("ScreeningUser")]
-        public int UserId { get; set; }
+        public string? UserId { get; set; }
         public ScreeningUser? User { get; set; }
-        */
-        [Required]
         [DisplayName("Do you have a fever of Fever of 37.8° or greater?")]
         public bool Question1 { get; set; }
-        [Required]
         [DisplayName("Do you have a runny nose?")]
         public bool Question2 { get; set; }
-        [Required]
         [DisplayName("Do you have a sore throat?")]
         public bool Question3 { get; set; }
         public bool Pass { get; set; }

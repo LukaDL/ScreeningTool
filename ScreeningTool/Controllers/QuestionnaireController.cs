@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ScreeningTool.Data;
 using ScreeningTool.Models;
+using ScreeningTool.Models.ViewModels;
 
 namespace ScreeningTool.Controllers
 {
@@ -13,13 +14,19 @@ namespace ScreeningTool.Controllers
         }
         public IActionResult Index(int id)
         {
-            Question question = _db.Questions.FirstOrDefault(q => q.QuestionNumber== id);
+            QuestionnaireViewModel questionnaireViewModel= new QuestionnaireViewModel();
+            questionnaireViewModel.Question = _db.Questions.FirstOrDefault(q => q.QuestionNumber== id);
 
-            if (question == null)
+            if (questionnaireViewModel.Question == null)
             {
                 return NotFound();
             }
-            return View(question);
+            return View(questionnaireViewModel);
+        }
+
+        public IActionResult Results()
+        {
+            return View();
         }
     }
 }

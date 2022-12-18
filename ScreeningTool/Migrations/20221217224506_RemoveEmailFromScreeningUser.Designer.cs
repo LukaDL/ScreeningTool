@@ -12,8 +12,8 @@ using ScreeningTool.Data;
 namespace ScreeningTool.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221217032853_AddedIdentity")]
-    partial class AddedIdentity
+    [Migration("20221217224506_RemoveEmailFromScreeningUser")]
+    partial class RemoveEmailFromScreeningUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -204,7 +204,12 @@ namespace ScreeningTool.Migrations
                     b.Property<bool>("Question3")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Questionnaires");
                 });
@@ -221,11 +226,7 @@ namespace ScreeningTool.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Confirmed")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -245,10 +246,6 @@ namespace ScreeningTool.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -331,6 +328,15 @@ namespace ScreeningTool.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ScreeningTool.Models.Questionnaire", b =>
+                {
+                    b.HasOne("ScreeningTool.Models.ScreeningUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

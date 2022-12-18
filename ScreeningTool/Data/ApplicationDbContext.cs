@@ -10,7 +10,6 @@ namespace ScreeningTool.Data
         {
 
         }
-
         public DbSet<ScreeningUser> ScreeningUsers { get; set; }
         public DbSet<Questionnaire> Questionnaires { get; set; }
         public DbSet<Question> Questions { get; set; }

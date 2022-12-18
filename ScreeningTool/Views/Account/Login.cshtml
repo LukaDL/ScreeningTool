@@ -1,20 +1,36 @@
-﻿<div class="container col-lg-6 offset-lg-3">
+﻿@using ScreeningTool.Models.ViewModels
+@model LoginViewModel
 
-    <form class="form-signin">
-        <div class="text-center mt-4">
-            <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container col-lg-6 offset-lg-3">
+    <div class="text-center mt-4">
+        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+    </div>
+
+@if (TempData["Error"] != null)
+{
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"]</span>
+            </div>
+}
+    <form class="form-signin" asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group mt-4">
+            <label asp-for="Email" class="control-label">Email address</label>
+            <input asp-for="Email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         </div>
 
-        <div class="form-label-group mt-4">
-            <label for="inputEmail">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <div class="form-group mt-4">
+            <label asp-for="Password" for="inputPassword">Password</label>
+            <input asp-for="Password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         </div>
 
-        <div class="form-label-group mt-4">
-            <label for="inputPassword">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        </div>
-
-        <button class="btn btn-lg btn-success btn-block col-12 mt-4" type="submit">Login</button>
+        <input class="btn btn-lg btn-success btn-block col-12 mt-4" type="submit" value="Log in" />
     </form>
+    <div class="mt-4">
+        <a asp-action="Register" class="btn btn-lg btn-outline-primary btn-block col-12">Need to register? Click here</a>
+    </div>
 </div>
