@@ -92,7 +92,7 @@ namespace ScreeningTool.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        [HttpPost]
+        
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

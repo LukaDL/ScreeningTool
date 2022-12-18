@@ -1,13 +1,14 @@
-﻿@model ScreeningTool.Models.Question
+﻿@model ScreeningTool.Models.ViewModels.QuestionnaireViewModel
+
 
 <div class="container mt-5 row">
     <div class="col-lg-6 offset-lg-3 mb-4">
-        <h1>@Model.QuestionText</h1>
+        <h1>@Model.Question.QuestionText</h1>
     </div>
     <div class="col-lg-4 offset-lg-4">
-        <img class="img-fluid col-12" src="@Model.Image" alt="symptom image"/>
+        <img class="img-fluid col-12" src="@Model.Question.Image" alt="symptom image"/>
     </div>
-    <div class="col-lg-8 offset-lg-2">
+    <div class="mt-5 col-lg-8 offset-lg-2">
         <div class="col-6 float-start">
             <a asp-controller="Questionnaire" asp-action="index" asp-route-id="" class="btn btn-lg btn-primary btn-block col-10 offset-1 p-3">Yes</a>
         </div>
@@ -16,7 +17,7 @@
         </div>
     </div>
 
-    @if (Model.QuestionNumber != 1)
+    @if (Model.Question.QuestionNumber != 1)
     {
         <a asp-action="index" asp-route-id="" class="btn btn-lg btn-info btn-block col-md-6 offset-md-3 float-md-start mt-5 p-3">Back</a>
     }
